@@ -18,7 +18,10 @@
 ![Login](screenshot2.png)
 ## Screenshot
 ![Dashboard](screenshot3.png)
-
+## Screenshot
+![Flow-chart](screenshot4.png)
+## Screenshot
+![DFD](screenshot5.png)
 
 
 ## Project Overview
