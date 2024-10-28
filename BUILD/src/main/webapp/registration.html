@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="date"] {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            var adharNumber = document.getElementById("adharNumber").value;
+            var mobileNumber = document.getElementById("mobileNumber").value;
+            var email = document.getElementById("email").value;
+            var dob = document.getElementById("dateOfBirth").value;
+            var password1 = document.getElementById("pass").value;
+            var password2 = document.getElementById("confirmPass").value;
+            var currentDate = new Date().toISOString().slice(0, 10); // Get current date in YYYY-MM-DD format
+            var minDate = '1990-01-01'; // Minimum date allowed
+            var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; // Password pattern (at least 8 characters, 1 uppercase, 1 lowercase, 1 digit, 1 special character)
+            
+            if (!/^\d{12}$/.test(adharNumber)) {
+                alert("Please enter a 12-digit Aadhar number.");
+                return false;
+            }
+            if (!/^\d{10}$/.test(mobileNumber)) {
+                alert("Please enter a 10-digit mobile number.");
+                return false;
+            }
+            if (!/^[\w\.-]+@gmail\.com$/.test(email)) {
+                alert("Please enter a valid Gmail address.");
+                return false;
+            }
+            if (dob < minDate || dob > currentDate) {
+                alert("Please enter a valid date of birth between January 1, 1990, and the current date.");
+                return false;
+            }
+            if (!passwordPattern.test(password1)) {
+                alert("Please enter a valid password. Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.");
+                return false;
+            }
+            if (password1 !== password2) {
+                alert("Passwords do not match. Please re-enter the password.");
+                return false;
+            }
+            return true;
+        }
+        function togglePasswordVisibility(inputId) {
+            var inputField = document.getElementById(inputId);
+            if (inputField.type === "password") {
+                inputField.type = "text";
+            } else {
+                inputField.type = "password";
+            }
+        }
+    </script>
+</head>
+<body style="background-image: url('https://i.pinimg.com/originals/89/0f/2b/890f2b80e3b616d5d8c83a34a98400e2.jpg'); background-size: cover;">
+    <div class="container">
+        <h2>Student Registration </h2>
+        <form action="RegistrationServlet" method="post" onsubmit="return validateForm()">
+            <label for="applicantName">Applicant Name:</label>
+            <input type="text" id="applicantName" name="applicantName">
+            
+            <label for="userName">USERNAME :</label>
+            <input type="text" id="userName" name="userName">
+            
+           <div class="password-toggle">
+                <label for="pass">PASSWORD "include@":</label><BR>
+                <input type="password" id="pass" name="pass">
+                <button type="button" onclick="togglePasswordVisibility('pass')">Show</button>
+            </div>
+            
+            <label for="confirmPass">Confirm Password:</label>
+            <div class="password-toggle">
+                <input type="password" id="confirmPass" name="confirmPass">
+                <button type="button" onclick="togglePasswordVisibility('confirmPass')">Show</button>
+            </div>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+            
+            <label for="mobileNumber">Mobile Number:</label>
+            <input type="text" id="mobileNumber" name="mobileNumber">
+            
+            <label for="adharNumber">Aadhaar Number:</label>
+            <input type="text" id="adharNumber" name="adharNumber">
+            
+            <label for="dateOfBirth">Date of Birth:</label>
+            <input type="date" id="dateOfBirth" name="dateOfBirth">
+            
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>

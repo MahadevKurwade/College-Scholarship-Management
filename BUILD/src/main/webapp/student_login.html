@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login</title>
+    <style>
+        /* Existing CSS styles */
+        body {
+         background-image: url('https://pin.it/vdaVDplum');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+         .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+        }
+        
+     
+        
+        
+        h2 {
+            text-align: center;
+            color: #3334;
+            position: relative;
+            animation: lightning 3s infinite linear alternate;
+        }
+        @keyframes lightning {
+            0% {
+                opacity: 1;
+                color: #333;
+            }
+            50% {
+                opacity: 0;
+                color: #ff0000; /* Change color to red */
+            }
+            100% {
+                opacity: 1;
+                color: #333;
+            }
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #4caf50;
+        }
+        .btn-group {
+            margin-top: 10px;
+            text-align: center;
+        }
+        .btn-group button {
+            margin: 0 5px;
+            padding: 5px 10px;
+            border: 2px solid #ccc;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: background-color 0.4s ease, transform 0.4s ease;
+        }
+        .btn-group button:hover {
+            background-color: #0056b3;
+            transform: scale(1.55);
+        }
+        #randomString {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .notification {
+            background-color: #f44336;
+            color: white;
+            text-align: center;
+            padding: 5px 10px;
+            border-radius: 3px;
+            margin-bottom: 15px;
+        }
+ .header {
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #0000ff, #ff0000); /* default gradient if JavaScript is disabled */
+        }
+
+    </style>
+</head>
+<body style="background-image: url('https://i.pinimg.com/originals/89/0f/2b/890f2b80e3b616d5d8c83a34a98400e2.jpg'); background-size: cover;">
+   <div class="header" >
+      
+          <h3>Project Name:-OpportunityNest:Empowering Students through College Scholarship Management</h3> 
+       </div>
+   
+    <div class="container"  style="background-image: url('https://i.pinimg.com/originals/89/0f/2b/890f2b80e3b616d5d8c83a34a98400e2.jpg'); background-size: cover;">
+        <h2>Student Login</h2>
+        <form id="loginForm" action="LoginServlet" method="post" class ="container">
+            <label for="username">USERNAME:</label>
+            <input type="text" id="username" name="username" required><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br>
+             
+            <label for="randomString">Captcha</label>
+            <div id="randomString"></div>
+             <div class="btn-group">
+            <input type="text" id="userInput" placeholder="Verify Captcha for login ">
+            <button class="btn-group" type="button" id="verifyButton" onclick="compareStrings()">VERIFY</button>
+            <p id="result"></p>
+            </div>
+             
+          
+            <input  type="submit" id="loginButton" value="Login" style="display: none;">
+       
+        
+        </form>
+        <div class="btn-group">
+            <button onclick="location.href='registration.html'">New Registration</button>
+            <button onclick="location.href='forget_password.html'">Forgot Password</button>
+            <button onclick="location.href='forget_username.html'">Forgot Username </button>
+            <button onclick="redirectToGmail()">Feedback</button>
+        </div>
+    </div>
+
+    <script>
+    function redirectToGmail() {
+        var recipient = "kurwademahadev@gmail.com";
+        var subject = "Feedback";
+        var body = "Dear User,\n\nPlease write your feedback or HELP here.\n\nBest regards,\n[Your Name]";
+        var gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipient}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = gmailLink;
+    }
+    
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var header = document.querySelector('.header');
+        var randomColor1 = getRandomColor();
+        var randomColor2 = getRandomColor();
+        header.style.background = 'linear-gradient(to right, ' + randomColor1 + ', ' + randomColor2 + ')';
+    });
+
+        // Function to generate a random color in hexadecimal format
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        // Function to generate a random string of characters with colored characters
+        function generateRandomStringWithColors(length) {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                const randomColor = getRandomColor();
+                result += `<span style="color: ${randomColor};">${characters.charAt(Math.floor(Math.random() * characters.length))}</span>`;
+            }
+            return result;
+        }
+
+        // Function to compare the user input with the generated random string
+        function compareStrings() {
+            const randomString = document.getElementById('randomString').innerText;
+            const userInput = document.getElementById('userInput').value;
+            const resultElement = document.getElementById('result');
+            const loginButton = document.getElementById('loginButton');
+
+            if (randomString === userInput) {
+                resultElement.innerText = 'Captcha Verified';
+                loginButton.style.display = 'block'; // Display the login button
+            } else {
+                resultElement.innerText = 'Please enter a valid Captcha';
+                loginButton.style.display = 'none'; // Hide the login button
+            }
+        }
+
+        // Generate a random string of length 8 with colored characters and display it
+        function generateAndDisplayRandomStringWithColors() {
+            const randomStringWithColors = generateRandomStringWithColors(8);
+            document.getElementById('randomString').innerHTML = randomStringWithColors;
+        }
+
+        // Function to add dynamic CSS styles
+        function addDynamicStyles() {
+            // Select the elements you want to style dynamically
+            const container = document.querySelector('.container');
+            const loginButton = document.getElementById('verifyButton');
+
+            // Add dynamic styles using JavaScript
+            container.style.backgroundColor = '#e6e6e6'; // Example background color
+            container.style.border = '2px solid #ccc'; // Example border
+            // Add more dynamic styles as needed
+
+            // Continuously change the color of the VERIFY button
+            setInterval(function() {
+                const randomColor = getRandomColor();
+                loginButton.style.backgroundColor = randomColor;
+            }, 1000); // Change color every second (adjust as needed)
+        }
+
+        // Call the function to add dynamic styles when the document is loaded
+        window.onload = function() {
+            addDynamicStyles();
+            generateAndDisplayRandomStringWithColors();
+        };
+    </script>
+</body>
+</html>
